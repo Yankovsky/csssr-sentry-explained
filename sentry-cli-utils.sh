@@ -1,6 +1,9 @@
 #!/bin/sh
 
 start_release() {
+	# propose-version возвращает хэш последнего коммита
+	export SENTRY_RELEASE=$(./node_modules/.bin/sentry-cli releases propose-version)
+
 	# Создаём новый релиз
 	yarn sentry-cli releases new $SENTRY_RELEASE
 

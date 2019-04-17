@@ -1,7 +1,6 @@
-console.log(process.env.NODE_ENV, process.env.SENTRY_RELEASE)
-
 const Sentry = require('@sentry/node')
 Sentry.init({
+  // https://sentry.io/organizations/csssr/issues/?project=1438725
   dsn: 'https://6e5d25b08f5c4d01a3d24b69ade9dbf1@sentry.io/1438725',
   // Приложение должно быть запущено с правильной версией релиза, чтобы ошибки попадали именно в этот релиз
   release: process.env.SENTRY_RELEASE,
@@ -32,6 +31,7 @@ class SentryExtendedError extends Error {
 
 const a = () => {
   setTimeout(() => {
+    // Пример создания объекта ошибки с дополнительными данными
     try {
       throw new SentryExtendedError({ baz: 'baz', bar: 'bar' }, 'My New Custom Error')
     } catch (e) {
@@ -45,6 +45,7 @@ const a = () => {
       })
     }
 
+    // Пример отправки сообщения с передачей дополнительных данных
     Sentry.withScope(scope => {
       Object.entries({ foo: 'foo' }).forEach(([k, v]) => {
         scope.setExtra(k, JSON.stringify(v))
@@ -54,6 +55,7 @@ const a = () => {
   }, 5000)
 }
 
+// Вложенные функции для создания stacktrace'а
 const b = () => {
   a()
 }

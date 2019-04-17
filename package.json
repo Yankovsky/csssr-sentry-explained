@@ -1,7 +1,7 @@
 {
-  "name": "sentry-playground",
+  "name": "csssr-sentry-explained",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "dependencies": {
     "@sentry/node": "^5.0.8"
@@ -15,6 +15,6 @@
   "scripts": {
     "build": "babel ./src --out-dir ./lib --source-maps",
     "start": "node lib/index.js",
-    "deploy": "NODE_ENV=production ./deploy.sh"
+    "deploy": "./deploy.sh"
   }
 }

@@ -4,21 +4,11 @@
 # Документация по sentry-cli https://docs.sentry.io/cli/releases/
 # Названия переменных окружения используемых в sentry-cli https://docs.sentry.io/cli/configuration/#configuration-values
 
-
-# Файл с фукнцами-утилитами для Sentry деплоя
-source ./sentry-cli-utils.sh
-
 # Читаем файл окружения
 source ./.env
 
-# Имя организации
-export SENTRY_ORG=csssr
-
-# Имя проекта
-export SENTRY_PROJECT=sentry-sample
-
-# propose-version возвращает хэш последнего коммита
-export SENTRY_RELEASE=$(./node_modules/.bin/sentry-cli releases propose-version)
+# Файл с фукнциями-утилитами для Sentry деплоя
+source ./sentry-cli-utils.sh
 
 start_release
 
