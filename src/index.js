@@ -50,7 +50,7 @@ const a = () => {
       Object.entries({ foo: 'foo' }).forEach(([k, v]) => {
         scope.setExtra(k, JSON.stringify(v))
       })
-      Sentry.captureMessage('My New Custom Message')
+      Sentry.captureMessage('My New Custom Message', 'fatal')
     })
   }, 5000)
 }
