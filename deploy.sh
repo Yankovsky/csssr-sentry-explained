@@ -10,11 +10,6 @@ export SENTRY_ORG=csssr
 # Документация по sentry-cli https://docs.sentry.io/cli/releases/
 # Названия переменных окружения используемых в sentry-cli https://docs.sentry.io/cli/configuration/#configuration-values
 
-# Токен пользователя, все операции sentry-cli выполняются от лица конкретного пользователя
-# Токен можно найти или создать здесь http://s.csssr.ru/U02D248T6/2019-04-16-1720-4px40k6h0d.png
-#
-export SENTRY_AUTH_TOKEN=352fc281b25b4ae7a3eb95af0cb49bd36f6401897871424da27e65c9212036d7
-
 # Имя организации
 export SENTRY_ORG=csssr
 
