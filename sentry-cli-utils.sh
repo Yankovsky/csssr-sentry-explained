@@ -8,6 +8,8 @@ start_release() {
 	yarn sentry-cli releases set-commits --auto $SENTRY_RELEASE
 }
 
+# Функция принимает два параметра – url-prefix и путь до папки с собранным js и source map'ами
+# Дока по url-prefix https://docs.sentry.io/cli/releases/#sentry-cli-sourcemaps
 # Сейчас source maps загружаются последовательно и очень медленно
 # https://github.com/getsentry/sentry-cli/issues/405
 # Можно эту функцию вызывать в бекграунде, пример в deploy.sh
