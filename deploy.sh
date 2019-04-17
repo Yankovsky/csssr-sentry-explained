@@ -1,45 +1,30 @@
 #!/bin/sh
 
-# Читаем файл окружения
-. ./.env
-
-# Имя организации
-export SENTRY_ORG=csssr
-
 # Документация по релизам https://docs.sentry.io/workflow/releases/?platform=node
 # Документация по sentry-cli https://docs.sentry.io/cli/releases/
 # Названия переменных окружения используемых в sentry-cli https://docs.sentry.io/cli/configuration/#configuration-values
 
+
+# Файл с фукнцами-утилитами для Sentry деплоя
+source ./sentry-cli-utils.sh
+
+# Читаем файл окружения
+source ./.env
+
 # Имя организации
 export SENTRY_ORG=csssr
+
+# Имя проекта
+export SENTRY_PROJECT=sentry-sample
 
 # propose-version возвращает хэш последнего коммита
 export SENTRY_RELEASE=$(./node_modules/.bin/sentry-cli releases propose-version)
 
-# Выполняем загрузку sourcemaps асинхронно, потому что сейчас они загружаются последовательно и очень медленно.
-# Не блокируем сборку отправкой sourcemaps
-# https://github.com/getsentry/sentry-cli/issues/405
-upload_sourcemaps() {
-	# Для этой команды требуется, чтобы project был указан через переменную окружения
-	# https://github.com/getsentry/sentry-cli/issues/451
-	SENTRY_PROJECT=sentry-sample ./node_modules/.bin/sentry-cli releases files $SENTRY_RELEASE upload-sourcemaps --url-prefix $(pwd)/lib --rewrite ./lib
-
-	# Завершаем создание релиза
-	yarn sentry-cli releases finalize $SENTRY_RELEASE
-
-	# Создаём новый Deploy в Sentry
-	yarn sentry-cli releases deploys $SENTRY_RELEASE new -e $NODE_ENV
-}
-
-# Создаём новый релиз
-yarn sentry-cli releases new --project sentry-sample $SENTRY_RELEASE
-
-# Прикрепляем коммиты к новому релизу
-yarn sentry-cli releases set-commits --auto $SENTRY_RELEASE
+start_release
 
 yarn build
 
-# Выполняем загрузку
-upload_sourcemaps &
+# Выполняем загрузку source maps в бекграунде, чтобы не блокировать сборку и запуск приложения
+upload_sourcemaps_and_finish_release $(pwd)/lib ./lib &
 
 yarn start
