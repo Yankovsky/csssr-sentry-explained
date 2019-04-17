@@ -33,7 +33,7 @@ class SentryExtendedError extends Error {
 const a = () => {
   setTimeout(() => {
     try {
-      throw new SentryExtendedError({ baz: 'baz', bar: 'bar' }, 'My Custom Error')
+      throw new SentryExtendedError({ baz: 'baz', bar: 'bar' }, 'My New Custom Error')
     } catch (e) {
       Sentry.withScope(scope => {
         if (e instanceof SentryExtendedError) {
@@ -49,7 +49,7 @@ const a = () => {
       Object.entries({ foo: 'foo' }).forEach(([k, v]) => {
         scope.setExtra(k, JSON.stringify(v))
       })
-      Sentry.captureMessage('My Custom Message')
+      Sentry.captureMessage('My New Custom Message')
     })
   }, 5000)
 }
