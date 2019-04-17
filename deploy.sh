@@ -44,6 +44,7 @@ yarn sentry-cli releases set-commits --auto $SENTRY_RELEASE
 
 yarn build
 
+# Выполняем загрузку
 upload_sourcemaps &
 
 yarn start
