@@ -51,7 +51,7 @@ const a = () => {
       })
       Sentry.captureMessage('My Custom Message')
     })
-  }, 10000)
+  }, 5000)
 }
 
 const b = () => {
