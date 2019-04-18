@@ -10,7 +10,7 @@ Sentry.init({
     // console.log('HINT', event)
     return event
   },
-  environment: process.env.NODE_ENV,
+  environment: process.env.SENTRY_ENV,
   // Добавляет стектрейс при отправке сообщений в Sentry
   // При ошибках стектрейс всегда отправляется вне зависимости от этого флага
   attachStacktrace: true,
