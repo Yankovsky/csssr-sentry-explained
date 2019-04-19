@@ -33,7 +33,7 @@ const a = () => {
   setTimeout(() => {
     // Пример создания объекта ошибки с дополнительными данными
     try {
-      throw new SentryExtendedError({ baz: 'baz', bar: 'bar' }, 'My New Custom Error')
+      throw new SentryExtendedError({ baz: 'baz', bar: 'bar' }, 'My New Custom Error!')
     } catch (e) {
       Sentry.withScope(scope => {
         if (e instanceof SentryExtendedError) {
